@@ -1,5 +1,5 @@
 package main
-
+// This is a comment in Vim.
 import (
 	"database/sql"
 	"embed"
