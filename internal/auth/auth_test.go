@@ -16,7 +16,7 @@ func TestGetAPIKey(t *testing.T) {
     }{
         "no auth header": {
             input: http.Header{},
-            want:  "some-api-key",
+            want:  ErrNoAuthHeaderIncluded.Error(),
         },
         "with auth header": {
             input: http.Header{"Authorization": {"Bearer some-api-key"}},
