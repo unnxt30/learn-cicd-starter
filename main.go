@@ -99,6 +99,6 @@ func main() {
 }
 
 
-func unused(){
-	//staticcheck tester
-}
+// func unused(){
+// 	//staticcheck tester
+// }
