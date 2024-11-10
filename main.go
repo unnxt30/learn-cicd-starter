@@ -1,4 +1,5 @@
 package main
+
 // This is a comment in Vim.
 import (
 	"database/sql"
@@ -96,3 +97,8 @@ func main() {
 	log.Printf("Serving on port: %s\n", port)
 	log.Fatal(srv.ListenAndServe())
 }
+
+
+// func unused(){
+// 	//staticcheck tester
+// }
