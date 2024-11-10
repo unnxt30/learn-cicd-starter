@@ -98,7 +98,6 @@ func main() {
 	log.Fatal(srv.ListenAndServe())
 }
 
-
 // func unused(){
 // 	//staticcheck tester
 // }
