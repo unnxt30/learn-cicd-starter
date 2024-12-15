@@ -1,16 +1,37 @@
 on:
     push:
-        branches: [main]
-jobs:
+      branches: [main]
+  
+  jobs:
     deploy:
-        name: Deploy
-        runs-on: ubuntu-latest
-        steps:
-            - name: Check out code
-              uses: actions/checkout@v4
-            - name: Set up Go
-              uses: actions/setup-go@v5
-              with:
-                  go-version: '1.23.0'
-            - name: Build
-              run: ./scripts/buildprod.sh
+      name: Deploy
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check out code
+          uses: actions/checkout@v4
+  
+        - name: Set up Go
+          uses: actions/setup-go@v5
+          with:
+            go-version: '1.21.0' # Ensure this is the correct version
+  
+        - name: Build
+          run: ./scripts/buildprod.sh
+  
+    authenticate_and_deploy:
+      name: Authenticate and Deploy to GCP
+      runs-on: ubuntu-latest
+  
+      steps:
+        - name: Set up Cloud SDK
+          uses: google-github-actions/setup-gcloud@v1
+          with:
+            service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+            project_id: notely-444811 # Your project ID
+  
+        - name: Use gcloud CLI
+          run: gcloud info
+        
+        - name: deploy image to gcp
+          run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-444811/notely-ar-repo/notely:latest .
+  
